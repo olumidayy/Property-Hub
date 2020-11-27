@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
                   fillColor: Color(0xFF81868C).withOpacity(0.25)
                 ),
       ),
-      home: SignInView(),
+      home: OnboardingView(),
     );
   }
 }

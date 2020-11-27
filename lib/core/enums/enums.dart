@@ -1,0 +1,2 @@
+
+enum UserType { user, agent }
