@@ -5,7 +5,6 @@ import 'package:property_hub/ui/widgets/custom_button.dart';
 import 'package:property_hub/ui/widgets/custom_textfield.dart';
 import 'package:property_hub/ui/views/signup_view/signup_view.dart';
 import 'package:property_hub/ui/widgets/logo_widget.dart';
-import 'package:flutter_screenutil/size_extension.dart';
 
 class SignInView extends StatefulWidget {
   @override
@@ -43,6 +42,7 @@ class _SignInViewState extends State<SignInView> {
             ],
           ),
         ),
+        SizedBox(height: 72.h,),
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

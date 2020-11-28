@@ -20,9 +20,12 @@ class _CustomTextFieldState extends State<CustomTextField> {
         obscureText: true,
         cursorColor: Color(0xFF283891),
         decoration: InputDecoration(
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(7),
-            ),
+            border: UnderlineInputBorder(
+                borderSide: BorderSide(color: Color(0xFF919297), width: 2.5)),
+            focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Color(0xFF283891), width: 2.5)),
+            enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Color(0xFF919297), width: 2.5)),
             hintText: widget.placeholder,
             focusColor: Color(0xff283891),
             filled: true,
