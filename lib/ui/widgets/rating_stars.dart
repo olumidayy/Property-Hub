@@ -2,21 +2,34 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/size_extension.dart';
 
 class RatingStars extends StatefulWidget {
+  final int rating;
+  final bool isReactive;
+
+  const RatingStars({Key key, this.rating, this.isReactive = true}) : super(key: key);
   @override
   _RatingStarsState createState() => _RatingStarsState();
 }
 
 class _RatingStarsState extends State<RatingStars> {
-  var _rating = 0;
+  var _rating;
+  
+  @override
+  void initState(){
+    _rating = widget.rating;
+    super.initState();
+  }
+
+
   void _handleTap(rating) {
     setState(() {
-      _rating = rating;
+      _rating = widget.isReactive ? rating : _rating;
     });
   }
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           for(var i = 1; i < 6; i++)
           InkWell(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:property_hub/ui/views/apartments_view/apartments_view.dart';
 import 'package:property_hub/ui/views/profile_view/agent_profile_view..dart';
 import 'package:property_hub/ui/views/verify_email/verified_view.dart';
 import 'package:property_hub/ui/views/onboarding_view/onboarding_view.dart';
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
         canvasColor: Color(0xFFEFF1FB),
         primaryColor: Color(0xFF283891),
       ),
-      home: AgentProfileView(),
+      home: ApartmentsView(),
     );
   }
 }
