@@ -4,7 +4,7 @@ import 'package:property_hub/ui/views/property_detail/property_detail.dart';
 import 'package:property_hub/ui/widgets/favorite_button.dart';
 import 'package:flutter_screenutil/size_extension.dart';
 
-class PropertyCard extends StatelessWidget {
+class PropertyCard extends StatefulWidget {
   const PropertyCard({
     Key key,
     @required this.assetName,
@@ -13,6 +13,7 @@ class PropertyCard extends StatelessWidget {
     @required this.noofBedrooms,
     @required this.noofBathrooms,
     @required this.nooflivingrooms,
+    this.isSaved = false,
   }) : super(key: key);
 
   final String assetName;
@@ -21,7 +22,13 @@ class PropertyCard extends StatelessWidget {
   final int noofBedrooms;
   final int noofBathrooms;
   final int nooflivingrooms;
+  final bool isSaved;
 
+  @override
+  _PropertyCardState createState() => _PropertyCardState();
+}
+
+class _PropertyCardState extends State<PropertyCard> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -38,7 +45,7 @@ class PropertyCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(15.sp),
           image: DecorationImage(
             fit: BoxFit.cover,
-            image: AssetImage('assets/$assetName')
+            image: AssetImage('assets/${widget.assetName}')
           )
         ),
         child: Column(
@@ -47,7 +54,7 @@ class PropertyCard extends StatelessWidget {
             Expanded(
               child: Container(
               alignment: Alignment.topRight,
-                child: FavoriteButton(),
+                child: FavoriteButton(isSaved: widget.isSaved,),
               )
             ),
             Expanded(
@@ -65,32 +72,32 @@ class PropertyCard extends StatelessWidget {
                     SizedBox(height: 10.h,),
                     RichText(
                       text: TextSpan(
-                      text: '#$price',
+                      text: '#${widget.price}',
                       style: TextStyle(color: Color(0xFF020303), fontSize: 20.sp, fontWeight: FontWeight.w600),
                       children: [
                         TextSpan(text: '/Year', style: TextStyle(color: Color(0xFF8C8B8E)))
                       ]
                     )),
-                    Text(location, style: TextStyle(color: Color(0xFF020303), fontSize: 16.sp, fontWeight: FontWeight.w500),),
+                    Text(widget.location, style: TextStyle(color: Color(0xFF020303), fontSize: 16.sp, fontWeight: FontWeight.w500),),
                     SizedBox(height: 17.h,),
                     Row(
                       children: [
                         Row(children: [
                           SvgPicture.asset('assets/bedroom.svg'),
                           SizedBox(width: 5.w,),
-                          Text('$noofBedrooms', style: TextStyle(color: Color(0xFF020303), fontSize: 17.sp, fontWeight: FontWeight.w500)),
+                          Text('${widget.noofBedrooms}', style: TextStyle(color: Color(0xFF020303), fontSize: 17.sp, fontWeight: FontWeight.w500)),
                         ],),
                         SizedBox(width: 25.w,),
                         Row(children: [
                           SvgPicture.asset('assets/bathroom.svg'),
                           SizedBox(width: 5.w,),
-                          Text('$noofBathrooms', style: TextStyle(color: Color(0xFF020303), fontSize: 17.sp, fontWeight: FontWeight.w500)),
+                          Text('${widget.noofBathrooms}', style: TextStyle(color: Color(0xFF020303), fontSize: 17.sp, fontWeight: FontWeight.w500)),
                         ],),
                         SizedBox(width: 25.w,),
                         Row(children: [
                           SvgPicture.asset('assets/living_room.svg'),
                           SizedBox(width: 5.w,),
-                          Text('$nooflivingrooms', style: TextStyle(color: Color(0xFF020303), fontSize: 17.sp, fontWeight: FontWeight.w500)),
+                          Text('${widget.nooflivingrooms}', style: TextStyle(color: Color(0xFF020303), fontSize: 17.sp, fontWeight: FontWeight.w500)),
                         ],),
                       ]
                     )

@@ -17,58 +17,60 @@ class _SignInViewState extends State<SignInView> {
     ScreenUtil.init(context,
         designSize: Size(375, 812), allowFontScaling: true);
     return Scaffold(
-        body: Center(
-      child: Column(children: [
-        SizedBox(height: 53.h,),
-        Padding(
-          padding: EdgeInsets.all(20.h),
-          child: PHLogo(height: 206.h, width: 298.w),
-        ),
-        CustomTextField(placeholder: 'Email-ID'),
-        SizedBox(height: 40.h),
-        CustomTextField(placeholder: 'Password'),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 35.w),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        body: SingleChildScrollView(
+      child: Center(
+        child: Column(children: [
+          SizedBox(height: 53.h,),
+          Padding(
+            padding: EdgeInsets.all(20.h),
+            child: PHLogo(height: 206.h, width: 298.w),
+          ),
+          CustomTextField(placeholder: 'Email-ID'),
+          SizedBox(height: 40.h),
+          CustomTextField(placeholder: 'Password'),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 35.w),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    Checkbox(value: false, onChanged: (val) {}),
+                    Text('Remember me')
+                  ],
+                ),
+                Text('Forgot Password?')
+              ],
+            ),
+          ),
+          SizedBox(height: 72.h,),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Row(
-                children: [
-                  Checkbox(value: false, onChanged: (val) {}),
-                  Text('Remember me')
-                ],
-              ),
-              Text('Forgot Password?')
+              CustomButton(text: 'Sign In'),
+              SizedBox(height: 10.h),
+              RichText(
+                  text: TextSpan(
+                      style:
+                          TextStyle(color: Color(0xFF020303), fontSize: 12.sp),
+                      text: 'You don\'t have an account?',
+                      children: [
+                    TextSpan(
+                        text: ' Sign Up',
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SignUpView())),
+                        style: TextStyle(
+                            color: Color(0xFF91285B),
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.bold))
+                  ])),
             ],
           ),
-        ),
-        SizedBox(height: 72.h,),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            CustomButton(text: 'Sign In'),
-            SizedBox(height: 10.h),
-            RichText(
-                text: TextSpan(
-                    style:
-                        TextStyle(color: Color(0xFF020303), fontSize: 12.sp),
-                    text: 'You don\'t have an account?',
-                    children: [
-                  TextSpan(
-                      text: ' Sign Up',
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => SignUpView())),
-                      style: TextStyle(
-                          color: Color(0xFF91285B),
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.bold))
-                ])),
-          ],
-        ),
-      ]),
+        ]),
+      ),
     ));
   }
 }

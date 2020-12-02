@@ -2,12 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/size_extension.dart';
 
 class FavoriteButton extends StatefulWidget {
+  final bool isSaved;
+
+  const FavoriteButton({Key key, this.isSaved = false}) : super(key: key);
   @override
   _FavoriteButtonState createState() => _FavoriteButtonState();
 }
 
 class _FavoriteButtonState extends State<FavoriteButton> {
-  var color = Colors.white;
+  var color;
+
+  @override
+  void initState(){
+    color = widget.isSaved ? Color(0xFF91285B) : Colors.white;
+    super.initState();
+  }
 
   void _toggleColor(){
     setState(() {
