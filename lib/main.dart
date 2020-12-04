@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:property_hub/ui/views/apartments_view/apartments_view.dart';
-import 'package:property_hub/ui/views/profile_view/agent_profile_view..dart';
-import 'package:property_hub/ui/views/verify_email/verified_view.dart';
 import 'package:property_hub/ui/views/onboarding_view/onboarding_view.dart';
-// import 'package:property_hub/ui/views/verify_email/verify_email_view.dart';
-// import 'package:property_hub/ui/views/verify_email/wrong_code_view.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,6 +9,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         appBarTheme: AppBarTheme(
@@ -23,7 +19,7 @@ class MyApp extends StatelessWidget {
         canvasColor: Color(0xFFEFF1FB),
         primaryColor: Color(0xFF283891),
       ),
-      home: ApartmentsView(),
+      home: OnboardingView(),
     );
   }
 }

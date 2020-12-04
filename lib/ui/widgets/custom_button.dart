@@ -4,8 +4,9 @@ import 'package:flutter_screenutil/size_extension.dart';
 class CustomButton extends StatelessWidget {
   final VoidCallback onPressed;
   final String text;
+  final bool isActive;
   const CustomButton({
-    Key key, this.onPressed, this.text,
+    Key key, this.onPressed, this.text, this.isActive = true,
   }) : super(key: key);
 
   @override
@@ -18,7 +19,7 @@ class CustomButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(5.sp)
         ),
           onPressed: onPressed ?? (){},
-          color: Color(0xFF283891),
+          color: isActive ? Color(0xFF283891) : Color(0xFF81868C),
           child: Text(text, style: TextStyle(color: Colors.white))),
     );
   }

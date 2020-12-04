@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:property_hub/core/constants/colors.dart';
+import 'package:property_hub/ui/views/add_apartment/add_apartment.dart';
 import 'package:property_hub/ui/widgets/rating_stars.dart';
 
 class ApartmentsView extends StatelessWidget {
@@ -31,7 +32,9 @@ class ApartmentsView extends StatelessWidget {
                 shrinkWrap: true,
                 crossAxisCount: 3,
                 children: [
-                  Icon(Icons.add_circle_outline, color: appBlack, size: 66.h),
+                  IconButton(
+                    onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => AddApartmentView())),
+                    icon: Icon(Icons.add_circle_outline, color: appBlack, size: 66.h)),
                   Container(
                     height: 122.h,
                     width: 122.h,

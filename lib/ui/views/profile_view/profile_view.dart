@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:property_hub/core/constants/colors.dart';
 
 class ProfileView extends StatelessWidget {
-  final text = 'Become a host';
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(context,
@@ -64,8 +63,6 @@ class ProfileView extends StatelessWidget {
                 OptionTile(text: 'Terms and Conditions'),
                 Divider(),
                 OptionTile(text: 'Rate Us'),
-                Divider(),
-                OptionTile(text: text),
                 Divider(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

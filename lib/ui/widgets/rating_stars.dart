@@ -5,7 +5,7 @@ class RatingStars extends StatefulWidget {
   final int rating;
   final bool isReactive;
 
-  const RatingStars({Key key, this.rating, this.isReactive = true}) : super(key: key);
+  const RatingStars({Key key, this.rating = 0, this.isReactive = false}) : super(key: key);
   @override
   _RatingStarsState createState() => _RatingStarsState();
 }
@@ -34,7 +34,7 @@ class _RatingStarsState extends State<RatingStars> {
           for(var i = 1; i < 6; i++)
           InkWell(
             onTap: () => _handleTap(i),
-            child: Icon(Icons.star, size: 16.w, color: _rating < i ? Color(0xFF969696) : Color(0xFFEABD1D),),
+            child: Icon(Icons.star, size: widget.isReactive ? 36.w : 16.w, color: _rating < i ? Color(0xFF969696) : Color(0xFFEABD1D),),
           )
         ]
       ),

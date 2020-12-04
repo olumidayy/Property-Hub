@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:property_hub/core/constants/colors.dart';
+import 'package:property_hub/ui/views/filter_view/filter_view.dart';
 import 'package:property_hub/ui/widgets/property_card.dart';
 
 class ExploreView extends StatelessWidget {
@@ -16,6 +17,30 @@ class ExploreView extends StatelessWidget {
     final noofBedrooms = 2;
     final noofBathrooms = 2;
     final nooflivingrooms = 1;
+    final states = [
+      'Abia',
+      'Adamawa',
+      'Akwa Ibom',
+      'Anambra',
+      'Bayelsa',
+      'Benue',
+      'Borno',
+      'Crossriver',
+      'Delta',
+      'Ebonyi',
+      'Ekiti',
+      'Enugu',
+      'Gombe',
+      'Imo',
+      'Jigawa',
+      'Kaduna',
+      'Katsina',
+      'Kebbi',
+      'Lagos',
+      'Plateau',
+      'Rivers',
+
+    ];
     return SingleChildScrollView(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -29,6 +54,7 @@ class ExploreView extends StatelessWidget {
               height: 38.h > 35 ? 35 : 38.h,
               width: 276.w,
               child: TextField(
+                autofillHints: states,
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.zero,
                   hintStyle: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w400),
@@ -40,11 +66,14 @@ class ExploreView extends StatelessWidget {
                 ),
               ),
             ),
-            Container(
-              color: Colors.white,
-              margin: EdgeInsets.all(10.w),
-              padding: EdgeInsets.all(6.25.sp),
-              child: SvgPicture.asset('assets/filter.svg'),
+            InkWell(
+              onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => FilterView())),
+              child: Container(
+                color: Colors.white,
+                margin: EdgeInsets.all(10.w),
+                padding: EdgeInsets.all(6.25.sp),
+                child: SvgPicture.asset('assets/filter.svg'),
+              ),
             )
           ]
         ),

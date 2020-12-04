@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:property_hub/core/constants/colors.dart';
 import 'package:property_hub/ui/widgets/favorite_button.dart';
 import 'package:property_hub/ui/widgets/rating_stars.dart';
 
@@ -12,6 +13,72 @@ class PropertyDetail extends StatefulWidget {
 class _PropertyDetailState extends State<PropertyDetail> {
   @override
   Widget build(BuildContext context) {
+
+    _showMaterialDialog() {
+      showDialog(
+        useSafeArea: false,
+          context: context,
+          builder: (_) => new AlertDialog(
+            insetPadding: EdgeInsets.all(25.w),
+                contentPadding: EdgeInsets.zero,
+                titlePadding: EdgeInsets.zero,
+                title: Container(
+                  height: 80.h,
+                  child: Stack(
+                    alignment: Alignment.topCenter,
+                    clipBehavior: Clip.none,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          IconButton(
+                            onPressed: () =>Navigator.pop(context),
+                            icon: Icon(Icons.close),
+                          )
+                        ],
+                      ),
+                      Positioned(
+                        top: -35.h,
+                        child: CircleAvatar(radius: 35.sp, backgroundImage: AssetImage('assets/dp.jpg'),)
+                      )
+                    ],
+                  ),
+                ),
+                content: SizedBox(
+                  height: 225.h,
+                  child: Column(
+                    children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text('Wade Warren',
+                        style: TextStyle(
+                            color: appBlack,
+                            fontSize: 18.sp,
+                            fontWeight: FontWeight.w500)),
+                        SizedBox(width: 3),
+                        SvgPicture.asset('assets/verified_account.svg')
+                      ]
+                    ),
+                    SizedBox(height: 11.h),
+                    Text('How would you rate this agent ?',
+                        style: TextStyle(
+                            color: appBlack,
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.w400)),
+                    SizedBox(height: 15.h),
+                    RatingStars(isReactive: true,),
+                    SizedBox(height: 21.h),
+                    Text('Maybe next time',
+                        style: TextStyle(
+                          decoration: TextDecoration.underline,
+                            color: appBlack,
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.w400)),
+                  ]),
+                ),
+              ));
+    }
     
     ScreenUtil.init(context,
         designSize: Size(375, 812), allowFontScaling: true);
@@ -84,12 +151,23 @@ class _PropertyDetailState extends State<PropertyDetail> {
                   SizedBox(height: 18.h),
                   Text('Property Agent', style: TextStyle(color: Color(0xFF020303), fontSize: 17.sp, fontWeight: FontWeight.w700)),
                   ListTile(
-                    leading: CircleAvatar(radius: 25.sp,),
-                    title: Text('Joseph Morgan'),
+                    leading: InkWell(
+                      onTap: _showMaterialDialog,
+                      child: CircleAvatar(
+                        backgroundImage: AssetImage('assets/dp.jpg'),
+                        radius: 25.sp,),
+                    ),
+                    title: Row(
+                      children: [
+                        Text('Joseph Morgan'),
+                        SizedBox(width: 3),
+                        SvgPicture.asset('assets/verified_account.svg')
+                      ],
+                    ),
                     subtitle: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                      RatingStars(),
+                      RatingStars(rating: 4, isReactive: false,),
                       Text(' (45 ratings)', style: TextStyle(color: Color(0xFF020303), fontSize: 14.sp, fontWeight: FontWeight.w300))
                     ],),
                     trailing: Container(

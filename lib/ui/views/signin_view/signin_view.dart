@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:property_hub/ui/views/main_view/main_view.dart';
 import 'package:property_hub/ui/widgets/custom_button.dart';
 import 'package:property_hub/ui/widgets/custom_textfield.dart';
 import 'package:property_hub/ui/views/signup_view/signup_view.dart';
@@ -47,7 +48,7 @@ class _SignInViewState extends State<SignInView> {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              CustomButton(text: 'Sign In'),
+              CustomButton(text: 'Sign In', onPressed: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MainView()),),),
               SizedBox(height: 10.h),
               RichText(
                   text: TextSpan(
