@@ -101,7 +101,12 @@ class _OnboardingViewState extends State<OnboardingView> {
                     ),
                   ),
                   currentIndex < 2 ? CustomButton(
-                    text: 'Get Started'
+                    text: 'Get Started',
+                    onPressed: (){
+                      setState(() {
+                        currentIndex = 2;
+                      });
+                    },
                   ) : Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

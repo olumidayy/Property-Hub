@@ -3,8 +3,10 @@ import 'package:flutter_screenutil/size_extension.dart';
 
 class CustomTextField extends StatefulWidget {
   final String placeholder;
+  final TextEditingController controller;
+  final bool forPassword;
 
-  const CustomTextField({Key key, @required this.placeholder})
+  const CustomTextField({Key key, @required this.placeholder, @required this.controller, this.forPassword=false})
       : super(key: key);
   @override
   _CustomTextFieldState createState() => _CustomTextFieldState();
@@ -17,7 +19,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
       width: 305.w,
       height: 50.h,
       child: TextField(
-        obscureText: true,
+        controller: widget.controller,
+        obscureText: widget.forPassword,
         cursorColor: Color(0xFF283891),
         decoration: InputDecoration(
             border: UnderlineInputBorder(
