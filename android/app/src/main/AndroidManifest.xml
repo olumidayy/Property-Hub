@@ -1,7 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.property_hub">
+
+   <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="property_hub"
+        android:label="Property Hub"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
