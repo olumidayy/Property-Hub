@@ -3,27 +3,43 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 import 'package:property_hub/core/constants/colors.dart';
+import 'package:property_hub/core/enums/enums.dart';
+import 'package:provider/provider.dart';
+import 'package:property_hub/ui/views/verify_email/verify_email_viewmodel.dart';
 import 'package:property_hub/ui/widgets/custom_button.dart';
 
-class VerifyEmailView extends StatelessWidget {
-  final TextEditingController _pinPutController = TextEditingController();
+class VerifyEmailView extends StatefulWidget {
+  @override
+  _VerifyEmailViewState createState() => _VerifyEmailViewState();
+}
+
+class _VerifyEmailViewState extends State<VerifyEmailView> {
+  String code;
+
   final FocusNode _pinPutFocusNode = FocusNode();
 
   BoxDecoration get _pinPutDecoration {
     return BoxDecoration(
-      border: Border(bottom: BorderSide()),
       color: Color(0XFF81868C).withOpacity(0.25),
       borderRadius: BorderRadius.vertical(top: Radius.circular(7)),
     );
+  }
+
+  updateCode(c){
+    setState(() {
+      code = c;
+    });
+    print(code);
   }
 
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(context,
         designSize: Size(375, 812), allowFontScaling: true);
+    var model = context.watch<VerifyEmailViewModel>();
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Center(
+      body: Center(
+        child:  model.state == ViewState.busy ? CircularProgressIndicator() : SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -41,19 +57,21 @@ class VerifyEmailView extends StatelessWidget {
                 margin: const EdgeInsets.all(20.0),
                 padding: const EdgeInsets.all(20.0),
                 child: PinPut(      
-                  fieldsCount: 5,
+                  onChanged: updateCode,
+                  fieldsCount: 6,
                   // onSubmit: (String pin) => _showSnackBar(pin, context),
                   focusNode: _pinPutFocusNode,
-                  controller: _pinPutController,
                   submittedFieldDecoration: _pinPutDecoration,
                   selectedFieldDecoration: _pinPutDecoration,
                   followingFieldDecoration: _pinPutDecoration,
                 ),
               ),
               SizedBox(height: 160.h),
-             Text('Resend code', style: TextStyle(color: purple, decoration: TextDecoration.underline, fontSize: 14.sp, fontWeight: FontWeight.w500)),
+             GestureDetector(
+               onTap: () async => await model.resendCode(context),
+               child: Text('Resend code', style: TextStyle(color: purple, decoration: TextDecoration.underline, fontSize: 14.sp, fontWeight: FontWeight.w500))),
               SizedBox(height: 11.h),
-             CustomButton(text: 'Verify Account')
+             CustomButton(text: 'Verify Account', onPressed: () async => await model.verfiyEmail(code, context),)
             ],
           ),
         ),

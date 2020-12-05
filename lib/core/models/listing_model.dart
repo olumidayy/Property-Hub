@@ -9,7 +9,7 @@ class Listing {
   int lounges;
   int price;
   bool isFurnished;
-  List<String> imageUrls;
+  List imageUrls;
 
   Listing({
     @required this.location,

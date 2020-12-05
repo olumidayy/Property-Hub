@@ -18,6 +18,10 @@ class VerifyCompany extends StatefulWidget {
 class _VerifyCompanyState extends State<VerifyCompany> {
   bool isUser;
 
+  TextEditingController name = TextEditingController();
+  TextEditingController number = TextEditingController();
+  TextEditingController agentNumber = TextEditingController();
+
   @override
   initState() {
     super.initState();
@@ -48,11 +52,11 @@ class _VerifyCompanyState extends State<VerifyCompany> {
                 ),
               ),
               SizedBox(height: 40.h),
-              CustomTextField(placeholder: 'Company Name'),
+              CustomTextField(placeholder: 'Company Name', controller: name,),
               SizedBox(height: 43.h),
-              CustomTextField(placeholder: 'Company Phone Number'),
+              CustomTextField(placeholder: 'Company Phone Number', controller: number,),
               SizedBox(height: 43.h),
-              CustomTextField(placeholder: 'Agent Verification Number'),
+              CustomTextField(placeholder: 'Agent Verification Number', controller: agentNumber,),
               SizedBox(height: 81.h),
               CustomButton(text: 'Verify Company', onPressed: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MainView())),),
             ]),

@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:property_hub/core/constants/colors.dart';
+import 'package:property_hub/ui/views/explore_view/explore_viewmodel.dart';
 import 'package:property_hub/ui/views/filter_view/filter_view.dart';
 import 'package:property_hub/ui/widgets/property_card.dart';
+
+import 'package:provider/provider.dart';
 
 class ExploreView extends StatelessWidget {
   @override
@@ -19,6 +22,7 @@ class ExploreView extends StatelessWidget {
     final nooflivingrooms = 1;
     final states = [
       'Abia',
+      'Abuja'
       'Adamawa',
       'Akwa Ibom',
       'Anambra',
@@ -37,10 +41,15 @@ class ExploreView extends StatelessWidget {
       'Katsina',
       'Kebbi',
       'Lagos',
+      'Nassarawa'
       'Plateau',
       'Rivers',
-
+      'Sokoto',
+      'Taraba',
+      'Zamfara'
     ];
+
+    var model = context.watch<ExploreViewModel>();
     return SingleChildScrollView(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -67,7 +76,7 @@ class ExploreView extends StatelessWidget {
               ),
             ),
             InkWell(
-              onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => FilterView())),
+              onTap: () async => await model.mockListings(),//Navigator.push(context, MaterialPageRoute(builder: (context) => FilterView())),
               child: Container(
                 color: Colors.white,
                 margin: EdgeInsets.all(10.w),

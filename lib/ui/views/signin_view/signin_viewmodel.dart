@@ -3,10 +3,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:property_hub/core/enums/enums.dart';
 import 'package:property_hub/core/services/user_services.dart';
-import 'package:property_hub/ui/views/verify_email/verify_email_view.dart';
+import 'package:property_hub/ui/views/main_view/main_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class SignUpViewModel extends ChangeNotifier {
+class SignInViewModel extends ChangeNotifier {
   UserServices services = UserServices();
 
   ViewState _state = ViewState.idle;
@@ -18,16 +18,19 @@ class SignUpViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  signUp(name, email, password, context) async {
+  signIn(email, password, context) async {
     try {
       toggleViewState();
-      var res = await services.registerUser(name, email, password);
+      var res = await services.requestToken(email, password);
       var statusCode = res.statusCode;
       toggleViewState();
-      if(statusCode == 200 || statusCode == 201) {
+      if(statusCode == 200) {
         var prefs = await SharedPreferences.getInstance();
-        prefs.setString('email', email);
-        Navigator.push(context, MaterialPageRoute(builder: (context) => VerifyEmailView()));
+        print(res.data);
+        prefs.setString('token', res.data['token']);
+        print(prefs.get('email'));
+        print(prefs.get('token'));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => MainView()));
       } else {
         //
       }

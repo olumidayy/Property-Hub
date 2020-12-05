@@ -4,9 +4,7 @@ import 'package:property_hub/ui/views/signup_view/signup_viewmodel.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:property_hub/core/enums/enums.dart';
-import 'package:property_hub/ui/views/main_view/main_view.dart';
 import 'package:property_hub/ui/views/signin_view/signin_view.dart';
-import 'package:property_hub/ui/views/verify_company_view/verify_company_view.dart';
 import 'package:property_hub/ui/widgets/custom_button.dart';
 import 'package:property_hub/ui/widgets/custom_textfield.dart';
 import 'package:property_hub/ui/widgets/logo_widget.dart';
@@ -129,7 +127,7 @@ class _SignUpViewState extends State<SignUpView> {
                     CustomButton(
                       text: 'Create Account',
                       onPressed: () async => await model.signUp(
-                          name.text, email.text, password.text),
+                          name.text, email.text, password.text, context),
                     ),
                     SizedBox(height: 10.h),
                     RichText(
