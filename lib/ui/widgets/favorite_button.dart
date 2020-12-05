@@ -3,8 +3,9 @@ import 'package:flutter_screenutil/size_extension.dart';
 
 class FavoriteButton extends StatefulWidget {
   final bool isSaved;
+  final onTap;
 
-  const FavoriteButton({Key key, this.isSaved = false}) : super(key: key);
+  const FavoriteButton({Key key, this.isSaved = false, this.onTap}) : super(key: key);
   @override
   _FavoriteButtonState createState() => _FavoriteButtonState();
 }
@@ -13,12 +14,13 @@ class _FavoriteButtonState extends State<FavoriteButton> {
   var color;
 
   @override
-  void initState(){
+  void initState() {
     color = widget.isSaved ? Color(0xFF91285B) : Colors.white;
     super.initState();
   }
 
-  void _toggleColor(){
+  void _handleTap() {
+    widget.onTap();
     setState(() {
       color = color == Colors.white ? Color(0xFF91285B) : Colors.white;
     });
@@ -29,7 +31,7 @@ class _FavoriteButtonState extends State<FavoriteButton> {
     return Padding(
       padding: EdgeInsets.only(top: 13.h),
       child: InkWell(
-        onTap: _toggleColor,
+        onTap: _handleTap,
         child: Container(
           height: 50.sp,
           width: 50.sp,

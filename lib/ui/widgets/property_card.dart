@@ -7,22 +7,23 @@ import 'package:flutter_screenutil/size_extension.dart';
 class PropertyCard extends StatefulWidget {
   const PropertyCard({
     Key key,
-    @required this.assetName,
+    @required this.imgUrl,
     @required this.price,
     @required this.location,
     @required this.noofBedrooms,
     @required this.noofBathrooms,
     @required this.nooflivingrooms,
-    this.isSaved = false,
+    this.isSaved = false, this.onTap,
   }) : super(key: key);
 
-  final String assetName;
+  final String imgUrl;
   final String price;
   final String location;
   final int noofBedrooms;
   final int noofBathrooms;
   final int nooflivingrooms;
   final bool isSaved;
+  final VoidCallback onTap;
 
   @override
   _PropertyCardState createState() => _PropertyCardState();
@@ -45,7 +46,7 @@ class _PropertyCardState extends State<PropertyCard> {
           borderRadius: BorderRadius.circular(15.sp),
           image: DecorationImage(
             fit: BoxFit.cover,
-            image: AssetImage('assets/${widget.assetName}')
+            image: NetworkImage(widget.imgUrl)
           )
         ),
         child: Column(
@@ -54,7 +55,7 @@ class _PropertyCardState extends State<PropertyCard> {
             Expanded(
               child: Container(
               alignment: Alignment.topRight,
-                child: FavoriteButton(isSaved: widget.isSaved,),
+                child: FavoriteButton(isSaved: widget.isSaved, onTap: widget.onTap,),
               )
             ),
             Expanded(

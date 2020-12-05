@@ -1,8 +1,9 @@
+
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
-import 'package:property_hub/core/models/listing_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 const baseUrl = 'https://ecx-property-hub.herokuapp.com/api';
 
@@ -70,22 +71,50 @@ class UserServices {
   }
 
   requestToken(String email, String password) async {
-    var res = await client.post('/accounts/request_token/', data: {
-      'username': email,
-      'password': password
-    }, options: options);
-    print(res);
+    var res;
+    try {
+      res = await client.post('/accounts/request_token/', data: {
+        'username': email,
+        'password': password
+      }, options: options);
+      print(res);
+    } catch (e) {
+      print('error o');
+    }
     return res;
   }
 
   fetchSaved() async {
-    var res = await client.get('/listings/saved/');
+    var prefs = await SharedPreferences.getInstance();
+    var token = prefs.getString('token');
+    var res = await http.get('$baseUrl/listings/saved/', headers: {
+      'Authorization': 'Token $token',
+    });
     print(res);
+    return res;
   }
 
   fetchMockListings() async {
-    var res = await http.get('https://ecx-property-hub.herokuapp.com/api/mock/listings') ;//.get('/mock/listings​/', options: options);
+    var res = await http.get('$baseUrl/mock/listings'); //.get('/mock/listings​/', options: options);
     // print(res);
-    return jsonDecode(res.body).map((it) => Listing.fromMap(it)).toList();
+    return res;
+  }
+
+  toggleSave(id) async {
+    var prefs = await SharedPreferences.getInstance();
+    var token = prefs.getString('token');
+    var saved = await fetchSaved();
+    List savedIds = jsonDecode(saved.body).map((listing) => listing['id']).toList();
+    print('done here');
+    if(savedIds.contains(id)){
+      return await http.post('$baseUrl/listings/$id/unsave/', headers: {
+        'Content-Type': 'application/json',
+      'Authorization': 'Token $token',
+    });
+    }
+    return await http.post('$baseUrl/listings/$id/save/', headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Token $token',
+    });
   }
 }

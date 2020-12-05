@@ -51,7 +51,7 @@ class _SavedPropertiesState extends State<SavedProperties> {
               children: [
                 for(var i = 0; i < 5; i++)
                 PropertyCard(
-                  assetName: 'prop3.png',
+                  imgUrl: 'https://api.adorable.io/avatars/256/7310d0120ff740f2cd0cd4a263ae81d6.png',
                   price: '750,000',
                   location: 'Lekki, Lagos.',
                   noofBedrooms: 2,

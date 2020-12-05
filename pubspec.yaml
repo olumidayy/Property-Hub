@@ -40,6 +40,7 @@ dependencies:
   shared_preferences: ^0.5.12+4
   google_fonts: ^1.1.1
   http: ^0.12.2
+  fluttertoast: ^7.1.5
 
 dev_dependencies:
   flutter_test:

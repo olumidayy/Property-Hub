@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:property_hub/core/enums/enums.dart';
 import 'package:property_hub/ui/views/signin_view/signin_view.dart';
 import 'package:property_hub/ui/views/signup_view/signup_view.dart';
 import 'package:property_hub/ui/widgets/custom_button.dart';
@@ -123,7 +124,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                     onPressed: () => Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => SignUpView())),
+                                  builder: (context) => SignUpView(userType: UserType.agent))),
                   )
                     ]
                   ),
