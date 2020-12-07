@@ -30,7 +30,7 @@ class SignUpViewModel extends ChangeNotifier {
         var prefs = await SharedPreferences.getInstance();
         prefs.setString('email', email);
         Fluttertoast.showToast(
-            msg: 'Logged In',
+            msg: 'Sign up success',
             toastLength: Toast.LENGTH_LONG,
             gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 1,
@@ -38,16 +38,16 @@ class SignUpViewModel extends ChangeNotifier {
             textColor: Colors.white,
             fontSize: 16.0
         );
-        Navigator.push(context, MaterialPageRoute(builder: (context) => VerifyEmailView()));
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => VerifyEmailView()));
       } else {
-          Fluttertoast.showToast(
-            msg: err ?? 'An error occurred',
-            toastLength: Toast.LENGTH_LONG,
-            gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 1,
-            backgroundColor: Colors.red,
-            textColor: Colors.white,
-            fontSize: 16.0
+        Fluttertoast.showToast(
+          msg: err ?? 'An error occurred',
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0
         );
       }
     } catch (e) {

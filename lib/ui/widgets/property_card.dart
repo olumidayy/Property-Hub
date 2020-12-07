@@ -73,7 +73,7 @@ class _PropertyCardState extends State<PropertyCard> {
                     SizedBox(height: 10.h,),
                     RichText(
                       text: TextSpan(
-                      text: '#${widget.price}',
+                      text: '₦${widget.price}',
                       style: TextStyle(color: Color(0xFF020303), fontSize: 20.sp, fontWeight: FontWeight.w600),
                       children: [
                         TextSpan(text: '/Year', style: TextStyle(color: Color(0xFF8C8B8E)))

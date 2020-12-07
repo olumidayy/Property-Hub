@@ -2,7 +2,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:property_hub/core/enums/enums.dart';
-import 'package:property_hub/ui/views/main_view/main_view.dart';
 import 'package:property_hub/ui/views/signin_view/signin_viewmodel.dart';
 import 'package:property_hub/ui/widgets/custom_button.dart';
 import 'package:property_hub/ui/widgets/custom_textfield.dart';
@@ -36,21 +35,21 @@ class _SignInViewState extends State<SignInView> {
           CustomTextField(placeholder: 'Email-ID', controller: email,),
           SizedBox(height: 40.h),
           CustomTextField(placeholder: 'Password', controller: password, forPassword: true,),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 35.w),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    Checkbox(value: false, onChanged: (val) {}),
-                    Text('Remember me')
-                  ],
-                ),
-                Text('Forgot Password?'),
-              ],
-            ),
-          ),
+          // Padding(
+          //   padding: EdgeInsets.symmetric(horizontal: 35.w),
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //     children: [
+          //       Row(
+          //         children: [
+          //           Checkbox(value: false, onChanged: (val) {}),
+          //           Text('Remember me')
+          //         ],
+          //       ),
+          //       Text('Forgot Password?'),
+          //     ],
+          //   ),
+          // ),
           SizedBox(height: 72.h,),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,

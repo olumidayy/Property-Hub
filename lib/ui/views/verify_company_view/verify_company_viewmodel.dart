@@ -3,12 +3,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:property_hub/core/enums/enums.dart';
-import 'package:property_hub/core/services/user_services.dart';
-import 'package:property_hub/ui/views/main_view/main_view.dart';
+import 'package:property_hub/core/services/agent_services.dart';
+import 'package:property_hub/ui/views/signin_view/signin_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class SignInViewModel extends ChangeNotifier {
-  UserServices services = UserServices();
+class VerifyCompanyViewModel extends ChangeNotifier {
+  AgentServices services = AgentServices();
 
   ViewState _state = ViewState.idle;
 
@@ -19,22 +19,21 @@ class SignInViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  signIn(email, password, context) async {
+  signUp(name, email, password, phoneNumber, companyName, context) async {
     try {
       toggleViewState();
-      var res = await services.requestToken(email, password);
+      print(state);
+      var res = await services.registerAgent(name, email, password, companyName, phoneNumber);
+      print(res.data['user']['email'].first);
       var statusCode = res.statusCode;
       var err = (res.data).values.first[0];
       toggleViewState();
-      if(statusCode == 200) {
+      print(state);
+      if(statusCode == 200 || statusCode == 201) {
         var prefs = await SharedPreferences.getInstance();
-        // print(res.data);
-        prefs.setString('token', res.data['token']);
         prefs.setString('email', email);
-        print(prefs.get('email'));
-        print(prefs.get('token'));
         Fluttertoast.showToast(
-            msg: 'Logged in',
+            msg: 'Sign up success',
             toastLength: Toast.LENGTH_LONG,
             gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 1,
@@ -42,20 +41,21 @@ class SignInViewModel extends ChangeNotifier {
             textColor: Colors.white,
             fontSize: 16.0
         );
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MainView()));
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignInView()));
       } else {
         Fluttertoast.showToast(
-            msg: err ?? 'An error occured',
-            toastLength: Toast.LENGTH_LONG,
-            gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 1,
-            backgroundColor: Colors.red,
-            textColor: Colors.white,
-            fontSize: 16.0
+          msg: err ?? 'An error occurred',
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0
         );
       }
     } catch (e) {
       toggleViewState();
+      print(state);
       print(e);
     }
   }

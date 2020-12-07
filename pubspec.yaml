@@ -41,6 +41,7 @@ dependencies:
   google_fonts: ^1.1.1
   http: ^0.12.2
   fluttertoast: ^7.1.5
+  autocomplete_textfield: ^1.7.3
 
 dev_dependencies:
   flutter_test:

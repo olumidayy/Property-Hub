@@ -51,7 +51,11 @@ class UserServices {
   }
 
   fetchUser() async {
-    var res = await client.get('/accounts/profile/', options: options);
+    var prefs = await SharedPreferences.getInstance();
+    var token = prefs.getString('token');
+    var res = await client.get('/accounts/profile/', options: options.merge(headers: {
+      'Authorization': 'Token $token',
+    }));
     print(res.statusCode);
     print(res.data);
     return res;

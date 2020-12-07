@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:property_hub/core/constants/colors.dart';
-import 'package:property_hub/core/models/listing_model.dart';
 import 'package:property_hub/ui/views/explore_view/explore_viewmodel.dart';
 import 'package:property_hub/ui/views/filter_view/filter_view.dart';
+import 'package:property_hub/ui/views/saved_properties/saved_properties_viewmodel.dart';
 import 'package:property_hub/ui/widgets/property_card.dart';
+import 'package:autocomplete_textfield/autocomplete_textfield.dart';
 
 import 'package:provider/provider.dart';
 
@@ -15,16 +16,10 @@ class ExploreView extends StatelessWidget {
     ScreenUtil.init(context,
         designSize: Size(375, 812), allowFontScaling: true);
 
-    final assetName = 'prop0.jpg';
-    final price = '650,000';
-    final location = 'Alapere, Lagos.';
-    final noofBedrooms = 2;
-    final noofBathrooms = 2;
-    final nooflivingrooms = 1;
     final states = [
       'Abia',
-      'Abuja'
-          'Adamawa',
+      'Abuja',
+      'Adamawa',
       'Akwa Ibom',
       'Anambra',
       'Bayelsa',
@@ -33,24 +28,36 @@ class ExploreView extends StatelessWidget {
       'Crossriver',
       'Delta',
       'Ebonyi',
+      'Edo',
       'Ekiti',
       'Enugu',
       'Gombe',
       'Imo',
       'Jigawa',
       'Kaduna',
+      'Kano',
       'Katsina',
       'Kebbi',
+      'Kogi',
+      'Kwara',
       'Lagos',
-      'Nassarawa'
+      'Nassarawa',
+      'Niger',
+      'Ogun',
+      'Ondo',
+      'Osun',
+      'Oyo',
       'Plateau',
       'Rivers',
       'Sokoto',
       'Taraba',
+      'Yobe',
       'Zamfara'
     ];
 
     var model = context.watch<ExploreViewModel>();
+    
+    var savedModel = context.watch<SavedPropertiesViewModel>();
     return FutureBuilder(
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
@@ -67,8 +74,9 @@ class ExploreView extends StatelessWidget {
                   margin: EdgeInsets.symmetric(vertical: 23.h),
                   height: 38.h > 35 ? 35 : 38.h,
                   width: 276.w,
-                  child: TextField(
-                    autofillHints: states,
+                  child: SimpleAutoCompleteTextField(
+                    suggestions: states,
+                    key: GlobalKey(),
                     decoration: InputDecoration(
                         contentPadding: EdgeInsets.zero,
                         hintStyle: TextStyle(
@@ -109,7 +117,9 @@ class ExploreView extends StatelessWidget {
                   children: data
                       .map(
                         (i) => PropertyCard(
-                          onTap: () async => await model.toggleSaved(i.id),
+                          onTap: () async  {
+                            savedModel.addProperty(i);
+                          },//await model.toggleSaved(i.id),
                             imgUrl: 'https://images.nigeriapropertycentre.com/properties/images/462672/05f359c86279e5-westbury-homes-buy-now-and-build-c-of-o-residential-land-for-sale-bogije-lekki-ibeju-lagos.jpeg',
                             price: i.price != null ? (i.price).toString() : '1,000,000',
                             location: i.location,

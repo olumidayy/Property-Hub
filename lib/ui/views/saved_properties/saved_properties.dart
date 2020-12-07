@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:property_hub/core/constants/colors.dart';
+import 'package:property_hub/ui/views/saved_properties/saved_properties_viewmodel.dart';
 import 'package:property_hub/ui/widgets/custom_button.dart';
 import 'package:property_hub/ui/widgets/property_card.dart';
+
+import 'package:provider/provider.dart';
 
 class SavedProperties extends StatefulWidget {
   final VoidCallback onPressed;
@@ -20,6 +23,8 @@ class _SavedPropertiesState extends State<SavedProperties> {
   var isEmpty = true;
     ScreenUtil.init(context,
         designSize: Size(375, 812), allowFontScaling: true);
+    
+    var model = context.watch<SavedPropertiesViewModel>();
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.transparent,
@@ -49,15 +54,17 @@ class _SavedPropertiesState extends State<SavedProperties> {
           ) : Center(
             child: Column(
               children: [
-                for(var i = 0; i < 5; i++)
+                for(var i = 0; i < model.savedProperties.length; i++)
+                
                 PropertyCard(
-                  imgUrl: 'https://api.adorable.io/avatars/256/7310d0120ff740f2cd0cd4a263ae81d6.png',
-                  price: '750,000',
-                  location: 'Lekki, Lagos.',
-                  noofBedrooms: 2,
-                  noofBathrooms: 2,
-                  nooflivingrooms: 1,
-                  isSaved: true,),
+                imgUrl: 'https://images.nigeriapropertycentre.com/properties/images/462672/05f359c86279e5-westbury-homes-buy-now-and-build-c-of-o-residential-land-for-sale-bogije-lekki-ibeju-lagos.jpeg',
+                location: model.savedProperties[i].location,
+                noofBathrooms: model.savedProperties[i].bathrooms,
+                noofBedrooms: model.savedProperties[i].bedrooms,
+                price: model.savedProperties[i].price.toString(),
+                nooflivingrooms: model.savedProperties[i].lounges,
+                onTap: model.removePropertyAt(i),
+              )
               ]
             ),
           ),

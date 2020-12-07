@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:property_hub/ui/views/signup_view/signup_viewmodel.dart';
+import 'package:property_hub/ui/views/verify_company_view/verify_company_view.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:property_hub/core/enums/enums.dart';
@@ -52,7 +53,7 @@ class _SignUpViewState extends State<SignUpView> {
                 PHLogo(height: 206.h, width: 298.w),
                 SizedBox(height: 21.h),
                 CustomTextField(
-                  placeholder: '${isUser ? '' : 'Company '}Name',
+                  placeholder: 'Name',
                   controller: name,
                 ),
                 SizedBox(height: 40.h),
@@ -126,8 +127,10 @@ class _SignUpViewState extends State<SignUpView> {
                   children: [
                     CustomButton(
                       text: 'Create Account',
-                      onPressed: () async => await model.signUp(
-                          name.text, email.text, password.text, context),
+                      onPressed: () async => isUser ?  await model.signUp(
+                          name.text, email.text, password.text, context) : Navigator.pushReplacement(context, MaterialPageRoute(
+                            builder: (context) => VerifyCompany(name: name.text, email: email.text, password: password.text)
+                          )),
                     ),
                     SizedBox(height: 10.h),
                     RichText(

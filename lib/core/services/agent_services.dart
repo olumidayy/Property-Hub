@@ -12,16 +12,26 @@ class AgentServices {
     },
   );
   var client = Dio(BaseOptions(baseUrl: baseUrl));
-  registerAgent(String name, String email, String password) async {
+  registerAgent(
+    String name,
+    String email,
+    String password,
+    String companyName,
+    String phoneNumber,
+  ) async {
     var names = name.split(' ');
     try {
       var res = await client.post(
         '/accounts/register/agent/',
         data: {
-          'email': email,
-          'first_name': names[0],
-          'last_name': names.length > 1 ? names[1] : names[0],
-          'password': password,
+          'user': {
+            'email': email,
+            'first_name': names[0],
+            'last_name': names.length > 1 ? names[1] : names[0],
+            'password': password,
+          },
+          'phone_number': phoneNumber,
+          'agent_display_name': companyName,
         },
         options: options,
       );
@@ -32,7 +42,6 @@ class AgentServices {
     }
   }
 
-
   fetchUser() async {
     var res = await client.get('/accounts/profile/', options: options);
     print(res.statusCode);
@@ -40,7 +49,8 @@ class AgentServices {
     return res;
   }
 
-  createListing(description, location, price, isFurnished, baths, beds, lounges) async {
+  createListing(
+      description, location, price, isFurnished, baths, beds, lounges) async {
     var res = await client.post('/listings​/create​/', data: {
       'name': description,
       'description': description,
@@ -57,10 +67,10 @@ class AgentServices {
   deleteListing(id) async {
     var prefs = await SharedPreferences.getInstance();
     var token = prefs.getString('token');
-    var res = client.delete('/listings/$id/delete/', options: options.merge(headers: {
-      'Authorization': 'Token $token',
-    }));
+    var res = client.delete('/listings/$id/delete/',
+        options: options.merge(headers: {
+          'Authorization': 'Token $token',
+        }));
     return res;
   }
-
 }

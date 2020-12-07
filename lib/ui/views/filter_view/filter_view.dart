@@ -75,7 +75,7 @@ class _FilterViewState extends State<FilterView> {
             FilterGroup(
               sectionName: 'Maximum Rent',
               controller: _maxRent,
-              options: ['₦500,000', '₦1,000,000', '₦1,000,000+'],
+              options: ['₦500,000', '\u{20A6}1,000,000', '₦1,000,000+'],
             ),
             FilterGroup(
               sectionName: 'Furnishing',
@@ -158,9 +158,9 @@ class _FilterGroupState extends State<FilterGroup> {
                         : null,
                   ),
                   padding: EdgeInsets.all(10),
-                  child: Text(widget.options[i],
+                  child: RichText(text: TextSpan(text: widget.options[i],
                       style: TextStyle(
-                          color: widget.controller.index == i ? Colors.white : appBlack)),
+                          color: widget.controller.index == i ? Colors.white : appBlack))),
                   alignment: Alignment.center),
             )
         ])

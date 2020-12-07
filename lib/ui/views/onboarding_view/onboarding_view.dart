@@ -113,7 +113,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                     children: [
                        CustomButton(
                     text: 'I\'m a User',
-                    onPressed: () => Navigator.push(
+                    onPressed: () => Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => SignUpView())),
@@ -121,7 +121,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                   SizedBox(width: 12.w),
                    CustomButton(
                     text: 'I\'m an Agent',
-                    onPressed: () => Navigator.push(
+                    onPressed: () => Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => SignUpView(userType: UserType.agent))),
@@ -138,7 +138,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                           TextSpan(
                             text: ' Sign In', 
                             recognizer: TapGestureRecognizer()
-                          ..onTap = () => Navigator.push(
+                          ..onTap = () => Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => SignInView())),                           

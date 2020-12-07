@@ -17,11 +17,18 @@ class _MainViewState extends State<MainView> {
     });
   }
 
-  List<Widget> _views = [
-    ExploreView(),
-    SavedProperties(),
-    ProfileView(),
-  ];
+  List<Widget> _views;
+
+  @override
+  void initState(){
+    _views = [
+      ExploreView(),
+      SavedProperties(onPressed: () => _switchIndex(0),),
+      ProfileView(),
+    ];
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

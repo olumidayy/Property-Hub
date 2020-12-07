@@ -4,11 +4,9 @@ import 'package:property_hub/core/constants/colors.dart';
 import 'package:property_hub/ui/views/profile_view/profile_viewmodel.dart';
 import 'package:property_hub/ui/views/signin_view/signin_view.dart';
 
-import 'user_profile_view.dart';
-
 import 'package:provider/provider.dart';
 
-class AgentProfileView extends StatelessWidget {
+class UserProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var model = context.watch<ProfileViewModel>();
@@ -25,13 +23,14 @@ class AgentProfileView extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-              Container(
-                  margin: EdgeInsets.only(top: 40.h, bottom: 17.h),
-                  child: CircleAvatar(
-                radius: 94.h,
-                child: Text(model.initials, style: TextStyle(fontSize: 60.sp),),
-              ),
-                  ),
+            Container(
+                margin: EdgeInsets.only(top: 40.h, bottom: 17.h),
+                child: CircleAvatar(
+              radius: 94.h,
+              child: Text(model.initials, style: TextStyle(fontSize: 60.sp),),
+            ),
+                ),
+                
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -43,12 +42,10 @@ class AgentProfileView extends StatelessWidget {
                 // Icon(Icons.edit, color: blue)
               ],
             ),
-            SizedBox(height: 25.h),
+            SizedBox(height: 39.h),
             Padding(
               padding: EdgeInsets.all(32.w),
               child: Column(children: [
-                OptionTile(text: 'Apartments'),
-                Divider(),
                 OptionTile(text: 'About us'),
                 Divider(),
                 OptionTile(text: 'Notifications'),
@@ -82,3 +79,29 @@ class AgentProfileView extends StatelessWidget {
   }
 }
 
+class OptionTile extends StatelessWidget {
+  const OptionTile({
+    Key key,
+    @required this.text,
+  }) : super(key: key);
+
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 4),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(text,
+              style: TextStyle(
+                  color: appBlack,
+                  fontSize: 17.sp,
+                  fontWeight: FontWeight.w500)),
+          Icon(Icons.chevron_right_sharp, color: blue)
+        ],
+      ),
+    );
+  }
+}
