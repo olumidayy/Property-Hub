@@ -2,11 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:property_hub/core/constants/colors.dart';
 import 'package:property_hub/ui/views/add_apartment/add_apartment.dart';
+import 'package:property_hub/ui/views/profile_view/profile_viewmodel.dart';
 import 'package:property_hub/ui/widgets/rating_stars.dart';
+
+import 'package:provider/provider.dart';
 
 class ApartmentsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    
+    var model = context.watch<ProfileViewModel>();
     ScreenUtil.init(context,
         designSize: Size(375, 812), allowFontScaling: true);
     return Scaffold(
@@ -17,14 +22,15 @@ class ApartmentsView extends StatelessWidget {
         child: Center(
           child: Column(
             children: [
-              SizedBox(height: 20.h),
-              CircleAvatar(
-                maxRadius: 66,
-                minRadius: 20,              
-                backgroundImage: AssetImage('assets/dp.jpg'),),
-              Text('Wade Warren', style: TextStyle(fontSize: 25.sp, fontWeight: FontWeight.w600),),
-              RatingStars(rating: 4,),
-              Text('(45 ratings)', style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w300)),
+              Container(
+                  margin: EdgeInsets.only(top: 20.h, bottom: 17.h),
+                  child: CircleAvatar(
+                radius: 94.h,
+                child: Text(model.initials, style: TextStyle(fontSize: 60.sp),),
+              )),
+              Text(model.name, style: TextStyle(fontSize: 25.sp, fontWeight: FontWeight.w600),),
+              RatingStars(rating: 0,),
+              Text('(0 ratings)', style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w300)),
               SizedBox(height: 36.h),
               GridView.count(
                 crossAxisSpacing: 5,

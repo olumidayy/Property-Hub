@@ -42,7 +42,7 @@ class _PropertyCardState extends State<PropertyCard> {
         height: 285.h,
         width: 325.w,
         decoration: BoxDecoration(
-          color: Colors.yellow,
+          color: Colors.grey[400],
           borderRadius: BorderRadius.circular(15.sp),
           image: DecorationImage(
             fit: BoxFit.cover,
@@ -61,7 +61,7 @@ class _PropertyCardState extends State<PropertyCard> {
             Expanded(
               child: Container(
                 padding: EdgeInsets.all(10.sp),
-                width: 325.w,        
+                width: 325.w < 325 ? 325 : 325.w,        
                 decoration: BoxDecoration(      
                   color: Colors.white,
                   borderRadius: BorderRadius.vertical(bottom: Radius.circular(15.sp))
@@ -80,7 +80,7 @@ class _PropertyCardState extends State<PropertyCard> {
                       ]
                     )),
                     Text(widget.location, style: TextStyle(color: Color(0xFF020303), fontSize: 16.sp, fontWeight: FontWeight.w500),),
-                    SizedBox(height: 17.h,),
+                    SizedBox(height: 14.h,),
                     Row(
                       children: [
                         Row(children: [

@@ -20,7 +20,7 @@ class _SavedPropertiesState extends State<SavedProperties> {
 
   @override
   Widget build(BuildContext context) {
-  var isEmpty = true;
+  // var isEmpty = true;
     ScreenUtil.init(context,
         designSize: Size(375, 812), allowFontScaling: true);
     
@@ -33,7 +33,7 @@ class _SavedPropertiesState extends State<SavedProperties> {
           centerTitle: true,
         ),
         body: SingleChildScrollView(
-          child: isEmpty ? Padding(
+          child: model.savedProperties.isEmpty ? Padding(
             padding: EdgeInsets.all(25.sp),
             child: Container(
               width: 232.w,
@@ -57,14 +57,18 @@ class _SavedPropertiesState extends State<SavedProperties> {
                 for(var i = 0; i < model.savedProperties.length; i++)
                 
                 PropertyCard(
-                imgUrl: 'https://images.nigeriapropertycentre.com/properties/images/462672/05f359c86279e5-westbury-homes-buy-now-and-build-c-of-o-residential-land-for-sale-bogije-lekki-ibeju-lagos.jpeg',
-                location: model.savedProperties[i].location,
-                noofBathrooms: model.savedProperties[i].bathrooms,
-                noofBedrooms: model.savedProperties[i].bedrooms,
-                price: model.savedProperties[i].price.toString(),
-                nooflivingrooms: model.savedProperties[i].lounges,
-                onTap: model.removePropertyAt(i),
-              )
+                  isSaved: true,
+                  imgUrl: 'https://images.nigeriapropertycentre.com/properties/images/462672/05f359c86279e5-westbury-homes-buy-now-and-build-c-of-o-residential-land-for-sale-bogije-lekki-ibeju-lagos.jpeg',
+                  location: model.savedProperties[i].location,
+                  noofBathrooms: model.savedProperties[i].bathrooms,
+                  noofBedrooms: model.savedProperties[i].bedrooms,
+                  price: model.savedProperties[i].price != null ? (model.savedProperties[i].price).toString() : '1,000,000',
+                  nooflivingrooms: model.savedProperties[i].lounges,
+                  onTap: () {
+                    model.removePropertyAt(i);
+                    print(model.savedProperties);
+                  },
+                )
               ]
             ),
           ),

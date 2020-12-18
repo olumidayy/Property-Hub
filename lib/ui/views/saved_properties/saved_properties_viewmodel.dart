@@ -12,7 +12,7 @@ class SavedPropertiesViewModel extends ChangeNotifier {
 
   ViewState get state => _state;
 
-  List<Listing> _savedProperties;
+  List<Listing> _savedProperties = [];
 
   List<Listing> get savedProperties => _savedProperties;
 
@@ -23,10 +23,10 @@ class SavedPropertiesViewModel extends ChangeNotifier {
 
   addProperty(Listing property) {
     _savedProperties.add(property);
-    notifyListeners();
   }
 
   removePropertyAt(int index){
+    print('here');
     _savedProperties.removeAt(index);
     notifyListeners();
   }

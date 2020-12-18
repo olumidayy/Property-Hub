@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:property_hub/core/enums/enums.dart';
-import 'package:property_hub/ui/views/signup_view/signup_view.dart';
 import 'package:property_hub/ui/views/verify_company_view/verify_company_viewmodel.dart';
 import 'package:property_hub/ui/widgets/custom_button.dart';
 import 'package:property_hub/ui/widgets/custom_textfield.dart';
@@ -44,7 +43,7 @@ class _VerifyCompanyState extends State<VerifyCompany> {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           leading: IconButton(
-              onPressed: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignUpView(userType: UserType.agent,))),
+              onPressed: () => Navigator.pop(context),
               icon: Icon(Icons.arrow_back_ios),
               color: Color(0xFF91285B)),
         ),

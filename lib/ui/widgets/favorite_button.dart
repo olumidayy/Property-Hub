@@ -29,7 +29,7 @@ class _FavoriteButtonState extends State<FavoriteButton> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(top: 13.h),
+      padding: EdgeInsets.only(top: 13.h, right: 5.w),
       child: InkWell(
         onTap: _handleTap,
         child: Container(

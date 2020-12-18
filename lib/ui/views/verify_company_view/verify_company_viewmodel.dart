@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:property_hub/core/enums/enums.dart';
 import 'package:property_hub/core/services/agent_services.dart';
-import 'package:property_hub/ui/views/signin_view/signin_view.dart';
+import 'package:property_hub/ui/views/verify_email/verify_email_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class VerifyCompanyViewModel extends ChangeNotifier {
@@ -14,8 +14,12 @@ class VerifyCompanyViewModel extends ChangeNotifier {
 
   ViewState get state => _state;
 
-  toggleViewState(){
-    _state = _state == ViewState.idle ? ViewState.busy : ViewState.idle;
+  toggleViewState({state}){
+    if(state == null){
+      _state = _state == ViewState.idle ? ViewState.busy : ViewState.idle;
+    } else {
+      _state = state;
+    }
     notifyListeners();
   }
 
@@ -24,11 +28,10 @@ class VerifyCompanyViewModel extends ChangeNotifier {
       toggleViewState();
       print(state);
       var res = await services.registerAgent(name, email, password, companyName, phoneNumber);
-      print(res.data['user']['email'].first);
+      print(res.data);
       var statusCode = res.statusCode;
-      var err = (res.data).values.first[0];
       toggleViewState();
-      print(state);
+      print(statusCode);
       if(statusCode == 200 || statusCode == 201) {
         var prefs = await SharedPreferences.getInstance();
         prefs.setString('email', email);
@@ -41,8 +44,10 @@ class VerifyCompanyViewModel extends ChangeNotifier {
             textColor: Colors.white,
             fontSize: 16.0
         );
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignInView()));
+        Navigator.pop(context);
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => VerifyEmailView()));
       } else {
+        var err = res.data['user']['email'].first;
         Fluttertoast.showToast(
           msg: err ?? 'An error occurred',
           toastLength: Toast.LENGTH_LONG,
@@ -54,7 +59,7 @@ class VerifyCompanyViewModel extends ChangeNotifier {
         );
       }
     } catch (e) {
-      toggleViewState();
+      toggleViewState(state: ViewState.idle);
       print(state);
       print(e);
     }

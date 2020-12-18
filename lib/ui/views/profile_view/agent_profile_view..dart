@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:property_hub/core/constants/colors.dart';
+import 'package:property_hub/ui/views/apartments_view/apartments_view.dart';
 import 'package:property_hub/ui/views/profile_view/profile_viewmodel.dart';
 import 'package:property_hub/ui/views/signin_view/signin_view.dart';
 
@@ -47,7 +48,9 @@ class AgentProfileView extends StatelessWidget {
             Padding(
               padding: EdgeInsets.all(32.w),
               child: Column(children: [
-                OptionTile(text: 'Apartments'),
+                InkWell(
+                  onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => ApartmentsView())),
+                  child: OptionTile(text: 'Apartments')),
                 Divider(),
                 OptionTile(text: 'About us'),
                 Divider(),

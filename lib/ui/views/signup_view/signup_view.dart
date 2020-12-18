@@ -128,7 +128,7 @@ class _SignUpViewState extends State<SignUpView> {
                     CustomButton(
                       text: 'Create Account',
                       onPressed: () async => isUser ?  await model.signUp(
-                          name.text, email.text, password.text, context) : Navigator.pushReplacement(context, MaterialPageRoute(
+                          name.text, email.text, password.text, context) : Navigator.push(context, MaterialPageRoute(
                             builder: (context) => VerifyCompany(name: name.text, email: email.text, password: password.text)
                           )),
                     ),

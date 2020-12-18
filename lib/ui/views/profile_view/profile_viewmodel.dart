@@ -25,9 +25,10 @@ class ProfileViewModel {
 
   profileView() async {
     var profile = await services.fetchUser();
-    _isUser = profile.data['is_customer'];
-    _firstname = profile.data['first_name'];
-    _lastname = profile.data['last_name'];
+    print(profile.data);
+    _isUser = profile.data['is_customer'] ?? false;
+    _firstname = _isUser ? profile.data['first_name'] : profile.data['user']['first_name'];
+    _lastname = _isUser ? profile.data['last_name'] : profile.data['user']['last_name'];
     return _isUser ? UserProfileView() : AgentProfileView();
   }
 

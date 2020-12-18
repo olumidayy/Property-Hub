@@ -65,7 +65,7 @@ class _SignInViewState extends State<SignInView> {
                     TextSpan(
                         text: ' Sign Up',
                         recognizer: TapGestureRecognizer()
-                          ..onTap = () => Navigator.push(
+                          ..onTap = () => Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => SignUpView())),
